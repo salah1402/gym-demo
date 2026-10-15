@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary": "#ffffff", "secondary-fixed-dim": "#c7c7c3", "surface-container-high": "#2a2a2a", "surface-tint": "#b6d32a", "on-error": "#690005", "secondary": "#c7c7c3", "surface-container-low": "#1c1b1b", "tertiary-fixed": "#e6e2dd", "on-secondary-fixed": "#1b1c1a", "outline-variant": "#454935", "primary-fixed": "#d1f047", "on-surface-variant": "#c6c9af", "on-tertiary": "#31302d", "on-tertiary-fixed": "#1c1c19", "tertiary-fixed-dim": "#c9c6c1", "error-container": "#93000a", "on-secondary-fixed-variant": "#464744", "primary-container": "#d1f047", "secondary-container": "#464744", "inverse-primary": "#556500", "primary": "#ffffff", "surface-container": "#201f1f", "on-error-container": "#ffdad6", "background": "#131313", "on-tertiary-fixed-variant": "#484743", "inverse-surface": "#e5e2e1", "surface-bright": "#3a3939", "surface-variant": "#353534", "inverse-on-surface": "#313030", "on-primary-container": "#5a6b00", "on-background": "#e5e2e1", "on-surface": "#e5e2e1", "on-primary": "#2b3400", "surface-container-highest": "#353534", "error": "#ffb4ab", "on-primary-fixed-variant": "#3f4c00", "outline": "#90937b", "surface-container-lowest": "#0e0e0e", "on-primary-fixed": "#181e00", "surface": "#131313", "on-secondary-container": "#b5b5b2", "on-tertiary-container": "#666460", "tertiary-container": "#e6e2dd", "primary-fixed-dim": "#b6d32a", "on-secondary": "#30312e", "secondary-fixed": "#e3e2df", "surface-dim": "#131313" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-desktop": "1.5rem", "space-lg": "1.5rem", "space-md": "1rem", "space-xl": "3rem", "margin-tablet": "2rem", "margin-desktop": "3rem", "margin": "1rem", "gutter": "1rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-2xl": "5rem" }, "fontFamily": { "headline-sm": ["Bebas Neue"], "headline-lg": ["Bebas Neue"], "title-md": ["Inter"], "label-tabular": ["Inter"], "label-caps": ["Inter"], "display-xl": ["Bebas Neue"], "body-md": ["Inter"], "body-lg": ["Inter"], "headline-lg-mobile": ["Bebas Neue"], "display-xl-mobile": ["Bebas Neue"], "headline-md": ["Bebas Neue"] }, "fontSize": { "headline-sm": ["28px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-lg": ["72px", { "lineHeight": "68px", "letterSpacing": "-0.03em", "fontWeight": "400" }], "title-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-tabular": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }], "display-xl": ["120px", { "lineHeight": "104px", "letterSpacing": "-0.04em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["44px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "display-xl-mobile": ["64px", { "lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "400" }], "headline-md": ["40px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><img alt="IRONVAULT Wordmark Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VVdL7ZexfnPmDEpkGYjQCfRTJmt9nXrao2k7D-Xe2gRUz4GQ8jbQZ2DePKgxKYEwbHp-FxfQJ_Df-piyZhrtsxl38aZBr2ll6Rv3r6tpNvSwPJHOP-c9bo4Xd-6ko5DuSA8OL-a3MuNCS_p-vcRM9_3LIh24M69b0lkJjuG-JwzvDn8XlobxUq9uBXM186xkrOjf_L3o99fLb6DpOdF1nc1Fk7i5vPuf09x4DSVnsa3PBgNoQhxUkyLeE"/><span class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface hidden xs:inline-block">IRONVAULT</span></div><div class="flex items-center gap-space-xs"><button class="min-h-[44px] min-w-[44px] px-space-md py-space-xs bg-primary-container text-on-primary font-headline-sm text-headline-sm uppercase tracking-wide flex items-center justify-center hover:bg-tertiary transition-colors" type="button">JOIN NOW</button><button aria-label="Toggle Navigation Menu" class="min-h-[44px] min-w-[44px] flex flex-col items-center justify-center gap-1.5 p-space-xs text-on-surface hover:text-primary-container transition-colors" type="button"><span class="w-6 h-[2px] bg-current block"></span><span class="w-6 h-[2px] bg-current block"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- HERO SECTION -->
+<section class="flex flex-col w-full bg-surface-container-lowest">
+<!-- Utility Subhead & Geographic Anchor -->
+<div class="flex items-center justify-between px-margin py-space-xs bg-surface-container border-b border-surface-variant">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-widest">FACILITY // 01 — ARTS DISTRICT LA</span>
+<span class="font-label-caps text-label-caps uppercase text-primary-container tracking-wider flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 bg-primary-container inline-block"></span>
+        VAULT LIVE / 14 ACTIVE PLATFORMS
+      </span>
+</div>
+<!-- Monumental Typography -->
+<div class="px-margin pt-space-lg pb-space-md">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile tracking-tighter uppercase text-primary leading-none">
+        BUILT BY<br/>DISCIPLINE.
+      </h1>
+</div>
+<!-- Editorial High-Contrast Photography -->
+<div class="relative w-full aspect-[4/3] bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover grayscale contrast-125 brightness-90" data-alt="Intense athlete covered in chalk and sweat mid-deadlift inside a raw brutalist concrete gym, dramatic high contrast rim lighting, desaturated industrial shadows, steel plates and heavy barbell in sharp focus, cinematic gritty sports editorial photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHmvoo6aiFpfSAO_qtECssP0I5IPRsYwX9xUH_nihh8yOt-q6jeuANBO62NKPK1zWS6kEZc5-KqjNKJFdUgyfcxprCDcUH5KV4nnzyiAcUk7-FR9LtYg3JuMo1E0p1MbmbX3zzJRlnE92VsVne-5HldUqApZwTAQZLKDc_yst74pIc7aI-Y_iQkPXuMLHqpVPTMHJ8tCSBg2SpkgGW2A7oZRfPdl3JnJcMaWTxXBRQcHtcF0v0Xhzj"/>
+<div class="absolute bottom-0 left-0 bg-surface-container-lowest/90 px-space-sm py-space-xs border-t border-r border-surface-variant">
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant">
+          IMG_01 // SEC. 04 PLATFORM EFFORT
+        </span>
+</div>
+</div>
+<!-- Statement & Call to Action -->
+<div class="flex flex-col px-margin py-space-md gap-space-md bg-surface-container-low border-b border-surface-variant">
+<p class="font-body-md text-body-md text-on-surface-variant leading-snug">
+        AN UNCOMPROMISING ATHLETIC COMPOUND FOR THOSE WHO PURSUE FUNCTION OVER FASHION. CAST IRON, OLYMPIC PLATFORMS, AND DATA-DRIVEN STRENGTH.
+      </p>
+<div class="flex flex-col gap-space-xs">
+<a class="w-full h-12 bg-primary-container text-on-primary font-headline-sm text-headline-sm uppercase tracking-wide flex items-center justify-center hover:bg-tertiary transition-none rounded-none" href="#apply-section">
+          APPLY FOR MEMBERSHIP
+        </a>
+<a class="w-full h-11 bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-widest flex items-center justify-between px-space-md hover:bg-surface-variant transition-none border border-surface-variant" href="#spaces-section">
+<span>EXPLORE FACILITY [01]</span>
+<span class="material-symbols-outlined text-[16px] text-primary-container">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- METRICS STRIP -->
+<section class="grid grid-cols-2 bg-surface-container-lowest border-b border-surface-variant">
+<div class="p-space-md border-r border-b border-surface-variant flex flex-col justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline">FOOTPRINT</span>
+<div class="mt-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary block">14,000</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant block mt-0.5 uppercase">SQ FT RAW STEEL</span>
+</div>
+</div>
+<div class="p-space-md border-b border-surface-variant flex flex-col justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline">ROSTER RESTRICTION</span>
+<div class="mt-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary-container block">120</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant block mt-0.5 uppercase">STRICT ATHLETE CAP</span>
+</div>
+</div>
+<div class="p-space-md border-r border-surface-variant flex flex-col justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline">DENSITY RATIO</span>
+<div class="mt-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary block">1 : 6</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant block mt-0.5 uppercase">COACH TO ATHLETE</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col justify-between">
+<span class="font-label-caps text-label-caps uppercase text-outline">ACCESS GATE</span>
+<div class="mt-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary block">24 / 7</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant block mt-0.5 uppercase">BIOMETRIC ENTRY</span>
+</div>
+</div>
+</section>
+<!-- DISCIPLINES & PROGRAMMING (ASYMMETRIC EDITORIAL) -->
+<section class="flex flex-col w-full bg-surface">
+<!-- Section Identifier Header -->
+<div class="px-margin py-space-sm bg-surface-container border-b border-surface-variant flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm uppercase text-primary tracking-tight">01 / DISCIPLINES &amp; PROGRAMMING</span>
+<span class="font-label-caps text-label-caps text-outline">CADENCE 2025</span>
+</div>
+<!-- Feature Discipline 01 (Large Anchor Cell) -->
+<div class="p-margin bg-surface-container-low border-b border-surface-variant flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="bg-primary-container text-on-primary font-label-caps text-label-caps px-1.5 py-0.5 uppercase font-bold">DISC // 01</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">BLOCK PERIODIZATION</span>
+</div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary leading-tight mt-1">
+        FOUNDATIONAL HYPERTROPHY &amp; POWER
+      </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        High mechanical tension protocols sequenced with calibrated barbells. Designed for skeletal density, targeted muscular recruitment, and unyielding posture under maximal loads.
+      </p>
+<!-- Technical Spec Table -->
+<div class="mt-space-xs bg-surface-container-lowest border border-surface-variant">
+<div class="flex justify-between px-space-sm py-space-xs border-b border-surface-variant font-label-tabular text-label-tabular">
+<span class="text-outline uppercase">VOLUME PROFILE</span>
+<span class="text-on-surface font-semibold uppercase">HIGH (85% 1RM)</span>
+</div>
+<div class="flex justify-between px-space-sm py-space-xs border-b border-surface-variant font-label-tabular text-label-tabular">
+<span class="text-outline uppercase">REST CYCLE</span>
+<span class="text-on-surface font-semibold uppercase">STRICT 180s INTERVAL</span>
+</div>
+<div class="flex justify-between px-space-sm py-space-xs font-label-tabular text-label-tabular">
+<span class="text-outline uppercase">HARDWARE APPARATUS</span>
+<span class="text-primary-container font-semibold uppercase">ELEIKO POWER RACKS</span>
+</div>
+</div>
+</div>
+<!-- Discipline 02 & 03 Split Rows -->
+<div class="flex flex-col">
+<!-- Row 02 -->
+<div class="p-margin bg-surface border-b border-surface-variant flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-caps text-label-caps uppercase tracking-wider">[ENG-02] AEROBIC CAPACITY</span>
+<span class="font-label-tabular text-label-tabular text-primary-container">60 MIN INTENSIVE</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm uppercase text-primary tracking-tight">
+          CONDITIONING ENGINE (METCON)
+        </h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Lactate threshold thresholding via Concept2 ergs, SkiErgs, sled drives, and assault sprints. No choreography; pure aerobic rate enhancement.
+        </p>
+</div>
+<!-- Row 03 -->
+<div class="p-margin bg-surface-container-low border-b border-surface-variant flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="text-outline font-label-caps text-label-caps uppercase tracking-wider">[WL-03] KINETIC VECTOR</span>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">MICRO-CADRE OF 4</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm uppercase text-primary tracking-tight">
+          OLYMPIC WEIGHTLIFTING DYNAMICS
+        </h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Precision turnover velocity, ground reactive force, and bar trajectory tracking. Snatch and clean-and-jerk mechanics broken down frame-by-frame.
+        </p>
+</div>
+</div>
+</section>
+<!-- ARCHITECTURAL FACILITY / SPACES -->
+<section class="flex flex-col w-full bg-surface-container-lowest border-b border-surface-variant" id="spaces-section">
+<div class="px-margin py-space-sm bg-surface-container border-b border-surface-variant flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm uppercase text-primary tracking-tight">02 / THE FACILITY</span>
+<span class="font-label-caps text-label-caps text-outline">ARCH // 214 INDUSTRIAL</span>
+</div>
+<!-- Architectural Monolith Photograph -->
+<div class="relative w-full aspect-[16/10] bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover grayscale contrast-110" data-alt="Modern brutalist athletic facility interior with exposed board-formed concrete walls, overhead industrial skylight casting natural light, row of matte black power cages, Olympic lifting platforms, machined dumbbells on racks, solitary male athlete lifting, strict clean architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2ANLBhzAJ9bNR4JorA0HbxvPTrJfJ6Recjxd-6f3AVUX_WbndWuYth5lWKbxx-sHoNRR_SRqw-HmkW5xmQsizNpIBb1OsMmcfEcqo3geZpL98cjNYBIE6uV6n0wRy0OQC2EuMyWPRkFAEvX5DPEl7uXGNPzJ-9SC1kox-oq7kmSr41CSJbxJTgY_FXr7sN26CgU1yYUHaN747fT2IGiLI1K6ylWslJ6KbWuJsHPGAhwWt3muOirhC"/>
+<div class="absolute top-0 right-0 bg-surface-container-lowest px-space-sm py-space-xs border-b border-l border-surface-variant">
+<span class="font-label-caps text-label-caps uppercase text-primary-container">LEVEL 01 FLOOR</span>
+</div>
+</div>
+<!-- Architectural Caption Ledger -->
+<div class="p-margin bg-surface-container-low flex flex-col gap-space-xs border-b border-surface-variant">
+<span class="font-label-caps text-label-caps uppercase text-primary-container tracking-wider">
+        ZONE 01: THE FORGE
+      </span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+        12 CUSTOM INTEGRATED POWER STATIONS, ELEIKO OLYMPIC BARS, CALIBRATED STEEL COMPETITION PLATES, AND BESPOKE 40MM SOUND-DAMPENED RUBBER SUB-FLOORS.
+      </p>
+</div>
+<!-- Facilities Ledger Items -->
+<div class="grid grid-cols-1 divide-y divide-surface-variant">
+<div class="px-margin py-space-sm flex items-center justify-between bg-surface">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps text-outline">[Z-02]</span>
+<span class="font-title-md text-title-md uppercase text-primary">COLD CONTRAST PLUNGE &amp; SAUNA</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">38°F / 200°F</span>
+</div>
+<div class="px-margin py-space-sm flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps text-outline">[Z-03]</span>
+<span class="font-title-md text-title-md uppercase text-primary">TURF SPRINTS &amp; CARRIER BAY</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant">45 YARDS</span>
+</div>
+<div class="px-margin py-space-sm flex items-center justify-between bg-surface">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps text-outline">[Z-04]</span>
+<span class="font-title-md text-title-md uppercase text-primary">BIO-ASSESSMENT LAB</span>
+</div>
+<span class="font-label-tabular text-label-tabular text-primary-container">INBODY 770</span>
+</div>
+</div>
+</section>
+<!-- MEMBERSHIP ARCHITECTURE (TABULAR COMPARISON) -->
+<section class="flex flex-col w-full bg-surface">
+<div class="px-margin py-space-sm bg-surface-container border-b border-surface-variant flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm uppercase text-primary tracking-tight">03 / MEMBERSHIP ARCHITECTURE</span>
+<span class="font-label-caps text-label-caps text-outline">CAP: 120 SEATS</span>
+</div>
+<!-- Notice Banner -->
+<div class="px-margin py-space-xs bg-surface-container-highest border-b border-surface-variant">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-primary-container">info</span>
+        MEMBERSHIP IS STRICTLY CAPPED AT 120 ATHLETES TO PRESERVE PLATFORM ACCESS.
+      </span>
+</div>
+<!-- Tier Stack -->
+<div class="flex flex-col divide-y divide-surface-variant">
+<!-- Tier 1: Foundry Access -->
+<div class="p-margin bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-outline">TIER // 01</span>
+<h4 class="font-headline-sm text-headline-sm uppercase text-primary">FOUNDRY ACCESS</h4>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm text-primary leading-none">$220</span>
+<span class="font-label-tabular text-label-tabular text-outline block">/ MONTH</span>
+</div>
+</div>
+<ul class="flex flex-col gap-1.5 font-body-md text-body-md text-on-surface-variant mt-1">
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Unrestricted 24/7 Biometric Vault entry
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Cold contrast suite &amp; infrared sauna access
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Executive locker bays &amp; towel service
+          </li>
+</ul>
+<button class="mt-space-xs w-full h-11 bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-widest border border-surface-variant hover:bg-surface-variant transition-none" type="button">
+          SELECT FOUNDRY ACCESS
+        </button>
+</div>
+<!-- Tier 2: Performance Athlete (Highlighted) -->
+<div class="p-margin bg-surface-container border-2 border-primary-container flex flex-col gap-space-sm relative">
+<div class="absolute -top-3 right-4 bg-primary-container text-on-primary px-2 py-0.5 font-label-caps text-label-caps uppercase font-bold">
+          MOST SELECTED // 14 SLOTS LEFT
+        </div>
+<div class="flex justify-between items-start mt-1">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-primary-container font-bold">TIER // 02</span>
+<h4 class="font-headline-sm text-headline-sm uppercase text-primary">PERFORMANCE ATHLETE</h4>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm text-primary-container leading-none">$340</span>
+<span class="font-label-tabular text-label-tabular text-outline block">/ MONTH</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+          For competitors requiring periodized training architecture and objective biometric scrutiny.
+        </p>
+<ul class="flex flex-col gap-1.5 font-body-md text-body-md text-on-surface mt-1">
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary-container inline-block"></span>
+            Everything in Foundry Access
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary-container inline-block"></span>
+            Bespoke 12-week progressive programming
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary-container inline-block"></span>
+            Monthly biomarker &amp; DEXA body-composition review
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary-container inline-block"></span>
+            Bi-weekly 1:1 kinetic assessment with Cadre
+          </li>
+</ul>
+<button class="mt-space-xs w-full h-12 bg-primary-container text-on-primary font-headline-sm text-headline-sm uppercase tracking-wider hover:bg-tertiary transition-none" type="button">
+          CLAIM PERFORMANCE TIER
+        </button>
+</div>
+<!-- Tier 3: Private Syndicate -->
+<div class="p-margin bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-outline">TIER // 03</span>
+<h4 class="font-headline-sm text-headline-sm uppercase text-primary">PRIVATE SYNDICATE</h4>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm text-primary leading-none">$550</span>
+<span class="font-label-tabular text-label-tabular text-outline block">/ MONTH</span>
+</div>
+</div>
+<ul class="flex flex-col gap-1.5 font-body-md text-body-md text-on-surface-variant mt-1">
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Unlimited private 1:1 coaching sessions
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Permanent personal locker &amp; gear laundering
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Priority reserved platform booking during peak windows
+          </li>
+<li class="flex items-center gap-2">
+<span class="w-1 h-1 bg-outline inline-block"></span>
+            Registered sports nutritionist protocol plan
+          </li>
+</ul>
+<button class="mt-space-xs w-full h-11 bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-widest border border-surface-variant hover:bg-surface-variant transition-none" type="button">
+          APPLY FOR SYNDICATE
+        </button>
+</div>
+</div>
+</section>
+<!-- MASTER CADRE (COACHING DOSSIER) -->
+<section class="flex flex-col w-full bg-surface-container-lowest">
+<div class="px-margin py-space-sm bg-surface-container border-t border-b border-surface-variant flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm uppercase text-primary tracking-tight">04 / MASTER CADRE</span>
+<span class="font-label-caps text-label-caps text-outline">CREDENTIALED ONLY</span>
+</div>
+<!-- Coach 01 -->
+<div class="p-margin border-b border-surface-variant flex flex-col gap-space-sm bg-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-primary-container">DIR // STRENGTH</span>
+<span class="font-label-tabular text-label-tabular text-outline">EXP // 14 YRS</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary leading-none">MARCUS VANCE</h3>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant uppercase mt-1 block">
+          HEAD OF STRENGTH &amp; CONDITIONING · CSCS*D
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Former strength coach for Tier-1 Olympic squads and collegiate athletics. Specializes in conjugate periodization and velocity-based force production.
+      </p>
+</div>
+<!-- Coach 02 -->
+<div class="p-margin border-b border-surface-variant flex flex-col gap-space-sm bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-primary-container">DIR // KINETICS</span>
+<span class="font-label-tabular text-label-tabular text-outline">EXP // 09 YRS</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary leading-none">ELENA ROSTOVA</h3>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant uppercase mt-1 block">
+          BIOMECHANICS &amp; JOINT ARCHITECTURE · MS EXERCISE SCI
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Published researcher in patellar tendon kinematics and bar path trajectory. Consulted globally for elite powerlifters resolving hip and shoulder impingements.
+      </p>
+</div>
+<!-- Coach 03 -->
+<div class="p-margin border-b border-surface-variant flex flex-col gap-space-sm bg-surface">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-primary-container">DIR // WEIGHTLIFTING</span>
+<span class="font-label-tabular text-label-tabular text-outline">EXP // 11 YRS</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md uppercase text-primary leading-none">KALEB CHEN</h3>
+<span class="font-label-tabular text-label-tabular text-on-surface-variant uppercase mt-1 block">
+          WEIGHTLIFTING TECHNICAL DIRECTOR · USAW SENIOR COACH
+        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        National championship barbell coach. Ruthless focus on catch symmetry, dynamic bar acceleration, and platform confidence.
+      </p>
+</div>
+</section>
+<!-- HIGH-IMPACT CLOSING CTA & ASSESSMENT FORM -->
+<section class="flex flex-col w-full bg-surface-container-lowest border-b border-surface-variant" id="apply-section">
+<!-- Brutalist Callout Banner -->
+<div class="px-margin pt-space-xl pb-space-lg bg-surface flex flex-col gap-space-xs border-b border-surface-variant">
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-widest">GATEWAY PROTOCOL</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile uppercase text-primary leading-none tracking-tight">
+        NO CASUALS.<br/>
+        NO EXCUSES.<br/>
+<span class="text-primary-container">ENTER THE VAULT.</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+        Applicants undergo mandatory screening for training experience and club etiquette. Walk-ins are rejected at the turnstile.
+      </p>
+</div>
+<!-- Application Form Block -->
+<div class="p-margin bg-surface-container-low flex flex-col gap-space-md">
+<form class="flex flex-col gap-space-md" id="vault-application" onsubmit="event.preventDefault(); document.getElementById('apply-success').classList.remove('hidden'); this.classList.add('hidden');">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-outline">FULL ATHLETE NAME</label>
+<input class="h-12 bg-surface-container-lowest text-on-surface px-space-sm font-label-tabular text-label-tabular uppercase border border-surface-variant focus:border-primary-container focus:outline-none rounded-none" placeholder="E.G. COLE T. HASTINGS" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-outline">EMAIL CONTACT</label>
+<input class="h-12 bg-surface-container-lowest text-on-surface px-space-sm font-label-tabular text-label-tabular uppercase border border-surface-variant focus:border-primary-container focus:outline-none rounded-none" placeholder="ATHLETE@DOMAIN.COM" required="" type="email"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-outline">DISCIPLINE OF PRIMARY FOCUS</label>
+<select class="h-12 bg-surface-container-lowest text-on-surface px-space-sm font-label-tabular text-label-tabular uppercase border border-surface-variant focus:border-primary-container focus:outline-none rounded-none">
+<option>POWERLIFTING &amp; HYPERTROPHY</option>
+<option>OLYMPIC WEIGHTLIFTING</option>
+<option>CONDITIONING ENGINE / METCON</option>
+<option>GENERAL ADVANCED RECONDITIONING</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps uppercase text-outline">CURRENT YEARS UNDER BARBELL</label>
+<div class="grid grid-cols-4 gap-space-xs">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="experience" type="radio"/>
+<div class="h-10 border border-surface-variant bg-surface-container-lowest flex items-center justify-center font-label-tabular text-label-tabular peer-checked:bg-primary-container peer-checked:text-on-primary">
+                1-2 YRS
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="experience" type="radio"/>
+<div class="h-10 border border-surface-variant bg-surface-container-lowest flex items-center justify-center font-label-tabular text-label-tabular peer-checked:bg-primary-container peer-checked:text-on-primary">
+                3-5 YRS
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="experience" type="radio"/>
+<div class="h-10 border border-surface-variant bg-surface-container-lowest flex items-center justify-center font-label-tabular text-label-tabular peer-checked:bg-primary-container peer-checked:text-on-primary">
+                5-10 YRS
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="experience" type="radio"/>
+<div class="h-10 border border-surface-variant bg-surface-container-lowest flex items-center justify-center font-label-tabular text-label-tabular peer-checked:bg-primary-container peer-checked:text-on-primary">
+                10+ YRS
+              </div>
+</label>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-14 bg-primary-container text-on-primary font-headline-sm text-headline-sm uppercase tracking-wide hover:bg-tertiary transition-none flex items-center justify-center rounded-none shadow-none" type="submit">
+            COMMENCE ASSESSMENT
+          </button>
+</div>
+<p class="font-label-caps text-label-caps uppercase text-outline text-center">
+          APPLICATIONS REVIEWED WITHIN 24 HOURS BY SENIOR CADRE.
+        </p>
+</form>
+<!-- Instant Response State -->
+<div class="hidden p-space-lg bg-surface border border-primary-container flex flex-col gap-space-sm items-center text-center" id="apply-success">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[24px]">check</span>
+</div>
+<span class="font-headline-sm text-headline-sm uppercase text-primary">DOSSIER RECEIVED</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Your credentials have been routed to Coach Vance. You will receive an invitation for platform induction via SMS/Email within 24 operational hours.
+        </p>
+<span class="font-label-caps text-label-caps uppercase text-primary-container">APPLICATION REF: #IV-8842</span>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Simple interaction for responsive radio tiles and form state
+  document.addEventListener('DOMContentLoaded', () => {
+    const radioInputs = document.querySelectorAll('input[name="experience"]');
+    radioInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        // Handled via Tailwind peer pseudo-classes
+      });
+    });
+  });
+</script><footer class="w-full bg-surface-container-lowest px-margin pt-space-xl pb-space-2xl mt-auto"><div class="flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-headline-md text-headline-md uppercase tracking-tight text-on-surface">IRONVAULT CLUB</span><span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">PREMIUM BRUTALIST ATHLETIC VAULT</span></div><div class="flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps uppercase text-outline">LOCATION</span><p class="font-body-md text-body-md text-on-surface">214 Industrial Blvd, Arts District</p></div><div class="flex flex-col gap-space-xs"><span class="font-label-caps text-label-caps uppercase text-outline">HOURS &amp; CONTACT</span><p class="font-body-md text-body-md text-on-surface">05:00 — 23:00 DAILY</p><p class="font-body-md text-body-md text-on-surface-variant">desk@ironvault.club / +1 (213) 555-0198</p></div><div class="flex flex-wrap gap-x-space-md gap-y-space-xs pt-space-md"><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface" data-path="discipline" href="#">DISCIPLINE</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface" data-path="programs" href="#">PROGRAMS</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface" data-path="spaces" href="#">SPACES</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface" data-path="membership" href="#">MEMBERSHIP</a><a class="font-label-caps text-label-caps uppercase text-on-surface-variant hover:text-on-surface" data-path="coaches" href="#">COACHES</a></div><div class="pt-space-md text-on-surface-variant font-label-tabular text-label-tabular flex flex-col gap-space-xs"><span>© 2025 IRONVAULT ATHLETIC CLUB LLC. ALL RIGHTS RESERVED.</span><span class="font-label-caps text-label-caps tracking-widest text-outline">SEC // 00 ARCHITECTURAL UTILITY SYSTEM</span></div></div></footer></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] flex-1 transition-colors text-primary-container font-semibold" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">fitness_center</span><span class="font-label-caps text-label-caps uppercase mt-1">VAULT</span></a><a class="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="programs" href="#"><span class="material-symbols-outlined text-[20px]">calendar_today</span><span class="font-label-caps text-label-caps uppercase mt-1">SCHEDULE</span></a><a class="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="spaces" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-caps text-label-caps uppercase mt-1">SPACES</span></a><a class="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="membership" href="#"><span class="material-symbols-outlined text-[20px]">badge</span><span class="font-label-caps text-label-caps uppercase mt-1">ACCESS</span></a><a class="flex flex-col items-center justify-center min-h-[44px] min-w-[44px] flex-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="coaches" href="#"><span class="material-symbols-outlined text-[20px]">sports</span><span class="font-label-caps text-label-caps uppercase mt-1">COACHES</span></a></div></nav></body></html>

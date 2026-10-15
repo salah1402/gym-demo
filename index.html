@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>IRONVAULT // STRENGTH ARCHITECTURE</title>
+  <link rel="icon" type="image/png" href="assets/ironvault-logo.png"/>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#0A0B0D",
+            "surface": "#0E0F12",
+            "surface-subtle": "#141518",
+            "surface-card": "#18191D",
+            "border-hairline": "#23252A",
+            "border-medium": "#33363F",
+            "primary": "#F4F3EF",
+            "primary-container": "#CCFF00",
+            "on-primary-fixed": "#0E0F12",
+            "secondary": "#A8A7A3",
+            "text-muted": "#6E7178"
+          },
+          fontFamily: {
+            "display": ["Anton", "sans-serif"],
+            "body": ["Space Grotesk", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      *, ::before, ::after {
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #0A0B0D;
+        color: #F4F3EF;
+        overflow-x: hidden;
+      }
+      * {
+        border-radius: 0 !important;
+      }
+    }
+    ::selection {
+      background-color: #CCFF00;
+      color: #0E0F12;
+    }
+    /* Hairline custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0A0B0D;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23252A;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #CCFF00;
+    }
+
+    /* Motion utility styles */
+    .headline-line-wrap {
+      overflow: visible;
+      padding-bottom: 0.05em;
+    }
+    .headline-line {
+      display: block;
+      will-change: transform, opacity;
+    }
+    
+    /* Interactive Card Borders */
+    .brutalist-card-interactive {
+      transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .brutalist-card-interactive:hover {
+      border-color: #CCFF00;
+      background-color: #16181D;
+    }
+
+    /* Photographic Zoom on Hover */
+    .img-zoom-hover {
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .group:hover .img-zoom-hover {
+      transform: scale(1.04);
+      filter: grayscale(80%) contrast(130%) brightness(1);
+    }
+
+    /* Top hairline scroll progress */
+    #scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #CCFF00;
+      z-index: 100;
+      pointer-events: none;
+      transition: width 0.05s linear;
+    }
+
+    /* Parallax & Mask Layering */
+    .mask-reveal-box {
+      overflow: hidden;
+    }
+
+    /* Fluid Typography Utilities */
+    .fluid-hero-headline {
+      font-size: clamp(3.2rem, 11vw, 6.2rem);
+      line-height: 0.88;
+    }
+    .fluid-climax-headline {
+      font-size: clamp(2.8rem, 10vw, 7.5rem);
+      line-height: 0.88;
+    }
+    .fluid-section-headline {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 0.95;
+    }
+
+    /* Accessibility Focus Visibility */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid #CCFF00 !important;
+      outline-offset: 2px !important;
+    }
+
+    /* Interactive Magnetic & Glow hover refinements */
+    .btn-brutalist-interactive {
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+    }
+    .btn-brutalist-interactive:hover {
+      transform: translateY(-2px);
+    }
+    .btn-brutalist-interactive:active {
+      transform: translateY(0);
+    }
+
+    /* Ambient Industrial Noise/Grain Overlay */
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Accessibility: prefers-reduced-motion reset */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .mask-reveal-box, .hero-parallax-target, .headline-line {
+        clip-path: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#0A0B0D] font-body text-primary antialiased selection:bg-primary-container selection:text-on-primary-fixed">
+
+  <!-- Ambient Texture Film Grain -->
+  <div class="film-grain"></div>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress-bar"></div>
+
+  <!-- ======================================================== -->
+  <!-- NAVIGATION BAR                                           -->
+  <!-- ======================================================== -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-50 bg-[#0A0B0D]/90 backdrop-blur-md border-b border-border-hairline transition-all duration-300">
+    <div class="h-16 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      
+      <!-- Logo & City -->
+      <a href="#" class="flex items-center gap-2 group">
+        <span class="w-2 h-5 bg-primary-container inline-block"></span>
+        <span class="font-display text-xl tracking-wider text-primary uppercase group-hover:text-primary-container transition-colors">IRONVAULT</span>
+        <span class="text-text-muted font-mono text-[10px] tracking-widest uppercase ml-1 pl-2 border-l border-border-hairline hidden sm:inline">BERLIN</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-8">
+        <a class="font-mono text-xs uppercase tracking-wider text-text-muted hover:text-primary transition-colors py-2" data-path="programs" href="#programs">
+          PROGRAMS
+        </a>
+        <a class="font-mono text-xs uppercase tracking-wider text-text-muted hover:text-primary transition-colors py-2" data-path="facility" href="#facility">
+          FACILITY
+        </a>
+        <a class="font-mono text-xs uppercase tracking-wider text-text-muted hover:text-primary transition-colors py-2" data-path="membership" href="#membership">
+          MEMBERSHIP
+        </a>
+        <a class="font-mono text-xs uppercase tracking-wider text-text-muted hover:text-primary transition-colors py-2" data-path="coaches" href="#coaches">
+          COACHES
+        </a>
+        <a class="font-mono text-xs uppercase tracking-wider text-text-muted hover:text-primary transition-colors py-2" data-path="ritual" href="#ritual">
+          MANIFESTO
+        </a>
+      </nav>
+
+      <!-- Right Action & Mobile Toggle -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="#intake" class="px-3.5 sm:px-5 py-2 sm:py-2.5 bg-primary-container text-on-primary-fixed font-mono text-[11px] sm:text-xs uppercase tracking-wider font-bold hover:bg-[#F4F3EF] hover:text-[#0A0B0D] transition-colors whitespace-nowrap">
+          APPLY NOW
+        </a>
+
+        <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 border border-border-hairline bg-surface-subtle flex flex-col items-center justify-center gap-1.5 text-primary hover:text-primary-container hover:border-primary-container transition-colors cursor-pointer" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu-drawer">
+          <span class="w-4 h-[1.5px] bg-current block"></span>
+          <span class="w-4 h-[1.5px] bg-current block"></span>
+          <span class="w-4 h-[1.5px] bg-current block"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MOBILE NAVIGATION DRAWER                                 -->
+  <!-- ======================================================== -->
+  <div id="mobile-menu-drawer" class="hidden fixed inset-0 z-50 bg-[#0A0B0D] flex flex-col justify-between p-6 overflow-y-auto" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+    <div class="flex items-center justify-between border-b border-border-hairline pb-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-4 bg-primary-container"></span>
+        <span class="font-display text-lg uppercase tracking-wider text-primary">IRONVAULT // MENU</span>
+      </div>
+      <button id="mobile-menu-close" class="p-2.5 border border-border-hairline text-primary hover:text-primary-container flex items-center justify-center cursor-pointer" aria-label="Close navigation menu">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="flex flex-col gap-4 py-8">
+      <a href="#hero" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary hover:text-primary-container transition-colors border-b border-border-hairline pb-3">
+        INDEX
+      </a>
+      <a href="#ritual" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary hover:text-primary-container transition-colors border-b border-border-hairline pb-3">
+        THE RITUAL
+      </a>
+      <a href="#facility" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary hover:text-primary-container transition-colors border-b border-border-hairline pb-3">
+        THE FACILITY
+      </a>
+      <a href="#programs" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary hover:text-primary-container transition-colors border-b border-border-hairline pb-3">
+        PROGRAMS
+      </a>
+      <a href="#membership" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary hover:text-primary-container transition-colors border-b border-border-hairline pb-3">
+        MEMBERSHIP
+      </a>
+      <a href="#coaches" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary hover:text-primary-container transition-colors border-b border-border-hairline pb-3">
+        COACHES
+      </a>
+      <a href="#intake" class="mobile-nav-link font-display text-3xl uppercase tracking-wider text-primary-container transition-colors border-b border-border-hairline pb-3">
+        APPLY FOR INTAKE
+      </a>
+    </div>
+
+    <div class="space-y-3 pt-4 border-t border-border-hairline">
+      <button data-action="open-prospectus" class="w-full py-3 border border-border-medium font-mono text-xs uppercase tracking-wider text-center hover:bg-surface-subtle text-primary">
+        ATHLETE PROSPECTUS [PDF]
+      </button>
+      <a href="#intake" class="mobile-nav-link block w-full py-3 bg-primary-container text-on-primary-fixed font-mono text-xs uppercase tracking-wider font-bold text-center">
+        START APPLICATION
+      </a>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MAIN CONTENT CONTAINER                                  -->
+  <!-- ======================================================== -->
+  <main class="w-full">
+    
+    <!-- ====================================================== -->
+    <!-- SCENE 01: COHESIVE CINEMATIC HERO                      -->
+    <!-- ====================================================== -->
+    <section class="relative w-full border-b border-border-hairline pt-16 flex flex-col justify-between" id="hero">
+      
+      <!-- Cohesive Hero Stage: Dominant Image Anchor + Integrated Typographic System -->
+      <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 flex-1 flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          <!-- Left Column: Unified Headline, Narrative Copy, and Action Controls (40%) -->
+          <div class="lg:col-span-5 order-2 lg:order-1 flex flex-col justify-center space-y-6 lg:pr-2">
+            
+            <div class="space-y-3">
+              <span class="hero-category inline-flex items-center gap-2 font-mono text-[11px] tracking-widest uppercase text-text-muted">
+                <span>STRENGTH ARCHITECTURE // BERLIN</span>
+              </span>
+              
+              <!-- Hero Headline: Fluid clamp() sizing prevents clipping on portrait displays -->
+              <h1 class="font-display fluid-hero-headline uppercase tracking-tighter text-primary">
+                <span class="headline-line-wrap block">
+                  <span class="hero-title-line headline-line block text-primary">BUILT BY</span>
+                </span>
+                <span class="headline-line-wrap block">
+                  <span class="hero-title-line headline-line block text-primary-container">DISCIPLINE.</span>
+                </span>
+              </h1>
+            </div>
+
+            <!-- Supporting Editorial Copy intimately tied to the headline -->
+            <p class="hero-copy-block font-body text-base text-secondary leading-relaxed max-w-lg">
+              An uncompromising strength compound engineered for heavy loading, calibrated plates, and dedicated athletes. No mirrors for vanity. Pure physical output.
+            </p>
+
+            <!-- Primary Actions -->
+            <div class="hero-cta-group flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+              <a href="#intake" class="px-7 py-3.5 bg-primary-container text-on-primary-fixed font-mono text-xs uppercase tracking-widest font-bold text-center hover:bg-[#F4F3EF] hover:text-[#0A0B0D] transition-colors shadow-none">
+                APPLY FOR INTAKE
+              </a>
+              <button data-action="open-prospectus" class="px-6 py-3.5 border border-border-medium text-primary font-mono text-xs uppercase tracking-wider text-center hover:bg-surface-subtle hover:border-text-muted transition-colors cursor-pointer">
+                VIEW PROSPECTUS
+              </button>
+            </div>
+
+            <!-- Subtle Status Telemetry -->
+            <div class="hero-meta-status flex items-center gap-5 pt-1 font-mono text-[11px] text-text-muted">
+              <span>Q3 INTAKE CYCLE</span>
+              <span>·</span>
+              <span class="text-primary-container font-semibold">120 ATHLETE ROSTER CAP</span>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Dominant Photographic Visual Anchor (60%) -->
+          <div class="lg:col-span-7 order-1 lg:order-2">
+            <div class="hero-media-stage relative overflow-hidden h-[340px] sm:h-[440px] lg:h-[560px] xl:h-[600px] border border-border-hairline bg-surface-subtle group">
+              <div class="hero-mask-wrap w-full h-full overflow-hidden relative">
+                <img id="hero-img" alt="Athlete loading barbell at competition platform" width="2400" height="1600" loading="eager" decoding="async" class="hero-parallax-target w-full h-full object-cover object-[center_35%] grayscale contrast-125 brightness-95 scale-100 origin-center img-zoom-hover" src="assets/hero-deadlift-hires.jpg"/>
+              </div>
+              <div class="hero-badge absolute bottom-4 right-4 bg-[#0A0B0D]/90 backdrop-blur-sm border border-border-hairline px-3 py-1.5 font-mono text-[11px] text-text-muted flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-primary-container"></span>
+                <span>FACILITY 01 // MAIN PLATFORM</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- METRICS STRIP (Compact Brutalist Benchmark Strip)      -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline bg-[#0E0F12]" id="metrics">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border-hairline">
+        
+        <div class="metric-card p-6 lg:p-8 flex flex-col justify-between brutalist-card-interactive">
+          <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider">01 // FOOTPRINT</span>
+          <div class="mt-3">
+            <div class="font-display text-4xl lg:text-5xl text-primary leading-none flex items-baseline">
+              <span class="metric-counter" data-target="2400">0</span>
+              <span class="text-3xl lg:text-4xl ml-2">M²</span>
+            </div>
+            <p class="font-mono text-xs text-secondary uppercase mt-2 tracking-wide">DEDICATED STRENGTH FACILITY</p>
+          </div>
+        </div>
+
+        <div class="metric-card p-6 lg:p-8 flex flex-col justify-between border-t md:border-t-0 brutalist-card-interactive">
+          <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider">02 // HARDWARE</span>
+          <div class="mt-3">
+            <div class="font-display text-4xl lg:text-5xl text-primary leading-none">
+              <span class="metric-text">1:1 RATIO</span>
+            </div>
+            <p class="font-mono text-xs text-secondary uppercase mt-2 tracking-wide">COMPETITION ELEIKO PLATES</p>
+          </div>
+        </div>
+
+        <div class="metric-card p-6 lg:p-8 flex flex-col justify-between border-t md:border-t-0 brutalist-card-interactive">
+          <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider">03 // ROSTER</span>
+          <div class="mt-3">
+            <div class="font-display text-4xl lg:text-5xl text-primary-container leading-none flex items-baseline">
+              <span class="metric-counter" data-target="120">0</span>
+              <span class="text-3xl lg:text-4xl ml-2">CAP</span>
+            </div>
+            <p class="font-mono text-xs text-secondary uppercase mt-2 tracking-wide">STRICT ATHLETE MEMBERSHIP</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SCENE 02: THE RITUAL (Editorial Photo Sequence)        -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline py-20 lg:py-32 bg-[#0A0B0D] relative" id="ritual">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="section-reveal-header flex flex-col md:flex-row md:items-end justify-between mb-16 pb-4 border-b border-border-hairline">
+          <div>
+            <span class="font-mono text-xs text-primary-container uppercase tracking-widest">02 // SEQUENCE</span>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl uppercase text-primary tracking-tight mt-1">
+              THE RITUAL
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-text-muted max-w-sm mt-3 md:mt-0 uppercase tracking-wide">
+            Chalked palms, knurled steel, calibrated friction. What happens before the bar breaks the floor.
+          </p>
+        </div>
+
+        <!-- Asymmetrical Editorial Collage -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+          
+          <!-- Large Feature: Chalk & Bar Grip -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="ritual-photo-frame relative h-[420px] sm:h-[520px] border border-border-hairline overflow-hidden bg-surface-subtle group">
+              <img src="assets/chalk-cloud.jpg" alt="Athlete clapping magnesium chalk powder" width="1200" height="801" loading="lazy" decoding="async" class="ritual-img w-full h-full object-cover grayscale contrast-130 brightness-90 img-zoom-hover"/>
+              <div class="absolute bottom-4 left-4 bg-[#0A0B0D]/90 border border-border-hairline px-3 py-1 font-mono text-[11px] text-text-muted">
+                01 // MAGNESIUM CARBONATE APPLICATION
+              </div>
+            </div>
+            <div class="border-l-2 border-primary-container pl-6 py-2">
+              <h3 class="font-display text-2xl sm:text-3xl uppercase text-primary tracking-tight">
+                "NO TALK. CHALK THE HANDS. SET THE LATERAL TENSION."
+              </h3>
+              <p class="font-body text-sm text-secondary mt-2 max-w-lg">
+                Preparation eliminates hesitation. Every repetition begins long before your hands wrap the knurling.
+              </p>
+            </div>
+          </div>
+
+          <!-- Vertical Complement: Barbell Loading & Knurl Detail -->
+          <div class="lg:col-span-5 space-y-8 lg:pt-12">
+            <div class="ritual-photo-frame relative h-[340px] sm:h-[400px] border border-border-hairline overflow-hidden bg-surface-subtle group">
+              <img src="assets/deadlift-detail.jpg" alt="Heavy competition barbell plates loaded on platform" width="1200" height="800" loading="lazy" decoding="async" class="ritual-img w-full h-full object-cover grayscale contrast-125 brightness-90 img-zoom-hover"/>
+              <div class="absolute bottom-4 left-4 bg-[#0A0B0D]/90 border border-border-hairline px-3 py-1 font-mono text-[11px] text-text-muted">
+                02 // CALIBRATED PLATES TO TOLERANCE ±10G
+              </div>
+            </div>
+
+            <div class="p-6 bg-surface-card border border-border-hairline space-y-3 brutalist-card-interactive">
+              <span class="font-mono text-xs text-primary-container uppercase tracking-wider block">TACTILE FEEDBACK</span>
+              <h4 class="font-display text-xl uppercase text-primary">AGGRESSIVE 1.2MM VOLCANO KNURLING</h4>
+              <p class="font-body text-sm text-secondary leading-relaxed">
+                IPF approved competition bars that bite without tearing calluses. Calibrated steel that does not flex until maximum threshold loading.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Secondary Detail Row: The Chalk Block & Hand Grip -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-8 border-t border-border-hairline">
+          <div class="ritual-photo-frame relative h-[300px] sm:h-[360px] border border-border-hairline overflow-hidden bg-surface-subtle group">
+            <img src="assets/chalk-hands-hires.jpg" alt="Chalked hands coated with magnesium carbonate before heavy lift" width="2000" height="1333" loading="lazy" decoding="async" class="ritual-img w-full h-full object-cover grayscale contrast-125 brightness-95 img-zoom-hover"/>
+            <div class="absolute bottom-4 left-4 bg-[#0A0B0D]/90 border border-border-hairline px-3 py-1 font-mono text-[11px] text-text-muted">
+              03 // INTENT &amp; FOCUS
+            </div>
+          </div>
+
+          <div class="space-y-4 md:pl-6">
+            <span class="font-mono text-xs text-text-muted uppercase tracking-widest block">THE PLATFORM CODE</span>
+            <h3 class="font-display text-3xl sm:text-4xl uppercase text-primary leading-tight">
+              PRECISION UNDER PRESSURE.
+            </h3>
+            <p class="font-body text-base text-secondary leading-relaxed max-w-md">
+              There is no spectacle here. We do not film workouts for social validation. Athletes step up, complete their prescribed percentages, log velocity data, and leave the platform pristine.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SCENE 03: THE FACILITY (Architectural Environment)     -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline py-20 lg:py-32 bg-[#0E0F12]" id="facility">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="section-reveal-header flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-border-hairline">
+          <div>
+            <span class="font-mono text-xs text-primary-container uppercase tracking-widest">03 // ARCHITECTURE</span>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl uppercase text-primary tracking-tight mt-1">
+              THE FACILITY
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-text-muted max-w-sm mt-3 md:mt-0 uppercase tracking-wide">
+            Raw cast concrete, acoustically isolated timber platforms, zero commercial clutter.
+          </p>
+        </div>
+
+        <!-- Dominant Architectural Shot with Mask Wipe & Parallax -->
+        <div class="facility-mask-wrap relative w-full h-[440px] sm:h-[560px] lg:h-[680px] border border-border-hairline overflow-hidden mb-6 bg-surface-subtle group">
+          <img id="facility-img" alt="IronVault Training Floor and Industrial Rig Architecture" width="2400" height="1600" loading="lazy" decoding="async" class="facility-parallax-target w-full h-[120%] -top-[10%] relative object-cover grayscale contrast-125 brightness-95 img-zoom-hover" src="assets/facility-industrial-hires.jpg"/>
+          <div class="absolute top-6 left-6 bg-[#0A0B0D]/90 border border-border-hairline px-4 py-2 font-mono text-xs text-primary">
+            MITTE WATERFRONT // FACILITY 01 FLOOR
+          </div>
+        </div>
+
+        <!-- Architectural Specifications Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+          
+          <div class="p-6 bg-surface-subtle border border-border-hairline brutalist-card-interactive">
+            <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider block mb-2">01 // PLATFORM ACOUSTICS</span>
+            <h3 class="font-display text-xl uppercase text-primary mb-2">40MM ISOLATED BIRCH</h3>
+            <p class="font-body text-sm text-secondary leading-relaxed">
+              Custom acoustic subflooring designed to absorb shock loads up to 400kg drops without lateral vibrational rebound.
+            </p>
+          </div>
+
+          <div class="p-6 bg-surface-subtle border border-border-hairline brutalist-card-interactive">
+            <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider block mb-2">02 // LIGHTING DESIGN</span>
+            <h3 class="font-display text-xl uppercase text-primary mb-2">DIRECTIONAL 4000K DIFFUSION</h3>
+            <p class="font-body text-sm text-secondary leading-relaxed">
+              Industrial high-bay fixtures positioned to eliminate direct bench-press glare and define barbell trajectory under work sets.
+            </p>
+          </div>
+
+          <div class="p-6 bg-surface-subtle border border-border-hairline brutalist-card-interactive">
+            <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider block mb-2">03 // SENSOR INTEGRATION</span>
+            <h3 class="font-display text-xl uppercase text-primary mb-2">GYMAWARE VELOCITY BAYS</h3>
+            <p class="font-body text-sm text-secondary leading-relaxed">
+              Linear optical position transducers permanently anchored to each rack for live bar speed and fatigue feedback.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SCENE 04: TRAINING PROGRAMS (Editorial Composition)    -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline py-20 lg:py-32 bg-[#0A0B0D]" id="programs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="section-reveal-header flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-border-hairline">
+          <div>
+            <span class="font-mono text-xs text-primary-container uppercase tracking-widest">04 // PROGRAMMING</span>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl uppercase text-primary tracking-tight mt-1">
+              SYSTEMATIC DISCIPLINES
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-text-muted max-w-sm mt-3 md:mt-0 uppercase tracking-wide">
+            Engineered strength cycles, velocity governance, and nervous system longevity.
+          </p>
+        </div>
+
+        <!-- Featured Discipline (Monumental Feature) -->
+        <div class="program-featured-card border border-border-hairline bg-surface-card p-6 sm:p-10 lg:p-12 mb-8 brutalist-card-interactive">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-7 space-y-4">
+              <span class="inline-block bg-[#23252A] text-primary-container font-mono text-[11px] px-3 py-1 uppercase tracking-wider font-semibold">
+                PRIMARY DISCIPLINE // 12-WEEK CYCLE
+              </span>
+              <h3 class="font-display text-3xl sm:text-5xl text-primary uppercase tracking-tight">
+                HEAVY COMPOUND STRENGTH
+              </h3>
+              <p class="font-body text-base text-secondary leading-relaxed max-w-xl">
+                Uncompromising execution across the squat, bench press, deadlift, and Olympic pulls. Linear block periodization backed by optical velocity sensors to prevent neuromuscular burnout while enforcing progressive overload.
+              </p>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-border-hairline font-mono text-xs">
+                <div>
+                  <span class="text-text-muted block text-[10px] uppercase">EQUIPMENT</span>
+                  <span class="text-primary font-semibold">Eleiko IPF Rigs</span>
+                </div>
+                <div>
+                  <span class="text-text-muted block text-[10px] uppercase">MONITORING</span>
+                  <span class="text-primary font-semibold">Velocity Loss &lt;20%</span>
+                </div>
+                <div>
+                  <span class="text-text-muted block text-[10px] uppercase">COACH RATIO</span>
+                  <span class="text-primary font-semibold">1 : 4 Maximum</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 border-l-0 lg:border-l border-border-hairline lg:pl-8">
+              <div class="bg-[#0A0B0D] border border-border-hairline p-6 quote-reveal-block space-y-3">
+                <blockquote class="font-display text-2xl sm:text-3xl uppercase text-primary leading-snug">
+                  "Fatigue is information. Form is absolute."
+                </blockquote>
+                <p class="font-mono text-xs text-text-muted uppercase">
+                  — IronVault Founding Principle
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Quieter Supporting Programs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div class="program-supporting-card border border-border-hairline bg-surface-subtle p-6 sm:p-8 flex flex-col justify-between brutalist-card-interactive">
+            <div>
+              <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider block mb-2">SUPPORTING // 02</span>
+              <h4 class="font-display text-2xl uppercase text-primary mb-2">METABOLIC CONDITIONING</h4>
+              <p class="font-body text-sm text-secondary leading-relaxed">
+                High-threshold cardiac and lactic buffering protocols using Woodway curve runners, Concept2 SkiErgs, and friction sled runs. Pure work capacity without compromising strength.
+              </p>
+            </div>
+            <div class="pt-6 font-mono text-xs text-text-muted flex items-center gap-4">
+              <span>WOODWAY CURVE</span>
+              <span>·</span>
+              <span>CONCEPT2 SKIERG</span>
+            </div>
+          </div>
+
+          <div class="program-supporting-card border border-border-hairline bg-surface-subtle p-6 sm:p-8 flex flex-col justify-between brutalist-card-interactive">
+            <div>
+              <span class="font-mono text-[11px] text-text-muted uppercase tracking-wider block mb-2">SUPPORTING // 03</span>
+              <h4 class="font-display text-2xl uppercase text-primary mb-2">STRUCTURAL BIOMECHANICS</h4>
+              <p class="font-body text-sm text-secondary leading-relaxed">
+                Joint end-range capacity, rotational anti-torque stability, and connective tissue preservation directed by our in-house sports biomechanists.
+              </p>
+            </div>
+            <div class="pt-6 font-mono text-xs text-text-muted flex items-center gap-4">
+              <span>PRI INTEGRATION</span>
+              <span>·</span>
+              <span>JOINT CAPSULE PRESERVATION</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SCENE 05: MEMBERSHIP (Refined Brutalist Comparison)    -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline py-20 lg:py-32 bg-[#0E0F12]" id="membership">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="section-reveal-header flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-border-hairline">
+          <div>
+            <span class="font-mono text-xs text-primary-container uppercase tracking-widest">05 // ACCESS</span>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl uppercase text-primary tracking-tight mt-1">
+              MEMBERSHIP BY APPLICATION
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-text-muted max-w-sm mt-3 md:mt-0 uppercase tracking-wide">
+            Roster strictly capped at 120 athletes. Every application is vetted for platform integrity.
+          </p>
+        </div>
+
+        <!-- 3 Comparable Tiers -->
+        <div class="membership-cards-container grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          
+          <!-- Tier 1: RESIDENT -->
+          <div class="membership-card border border-border-hairline bg-surface-subtle p-6 lg:p-8 flex flex-col justify-between brutalist-card-interactive" data-tier="resident">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-border-hairline mb-4 font-mono text-xs text-text-muted">
+                <span>TIER 01</span>
+                <span>CAP: 50</span>
+              </div>
+              <h3 class="font-display text-2xl uppercase text-primary mb-1">RESIDENT</h3>
+              <div class="flex items-baseline gap-2 mb-4">
+                <span class="font-display text-4xl text-primary font-normal">€145</span>
+                <span class="font-mono text-xs text-text-muted uppercase">/ MONTH</span>
+              </div>
+              <p class="font-body text-sm text-secondary mb-6">
+                Foundational autonomous training access for lifters running self-directed programming.
+              </p>
+              <ul class="space-y-3 font-body text-sm text-secondary border-t border-border-hairline pt-4">
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>Facility access 05:00 – 23:00 daily</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>Biometric turnstile entry</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>Locker &amp; contrast shower recovery</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-8">
+              <button onclick="window.selectTierAndScroll('RESIDENT (€145/MO)')" class="w-full py-3.5 border border-border-medium text-primary font-mono text-xs uppercase tracking-wider hover:bg-[#23252A] hover:border-text-muted transition-colors cursor-pointer">
+                APPLY FOR RESIDENT
+              </button>
+            </div>
+          </div>
+
+          <!-- Tier 2: ATHLETE PROTOCOL (Highlighted Recommended Plan) -->
+          <div class="membership-card border-2 border-primary-container bg-surface-card p-6 lg:p-8 flex flex-col justify-between relative shadow-none brutalist-card-interactive" data-tier="protocol">
+            <div class="absolute -top-3 left-6 bg-primary-container text-on-primary-fixed px-3 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest">
+              RECOMMENDED
+            </div>
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-border-hairline mb-4 font-mono text-xs text-primary-container mt-1">
+                <span>TIER 02</span>
+                <span>CAP: 50</span>
+              </div>
+              <h3 class="font-display text-2xl uppercase text-primary mb-1">ATHLETE PROTOCOL</h3>
+              <div class="flex items-baseline gap-2 mb-4">
+                <span class="font-display text-4xl text-primary-container font-normal">€220</span>
+                <span class="font-mono text-xs text-text-muted uppercase">/ MONTH</span>
+              </div>
+              <p class="font-body text-sm text-secondary mb-6">
+                Structured periodization, GymAware feedback loops, and coach volume scrutiny.
+              </p>
+              <ul class="space-y-3 font-body text-sm text-primary border-t border-border-hairline pt-4">
+                <li class="flex items-center gap-2">
+                  <span class="text-primary-container">•</span>
+                  <span>All Resident benefits included</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-primary-container">•</span>
+                  <span>12-week block periodization review</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-primary-container">•</span>
+                  <span>GymAware optical velocity loss tracking</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-primary-container">•</span>
+                  <span>Priority platform reservation slots</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-8">
+              <button onclick="window.selectTierAndScroll('ATHLETE PROTOCOL (€220/MO)')" class="w-full py-3.5 bg-primary-container text-on-primary-fixed font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#F4F3EF] hover:text-[#0A0B0D] transition-colors cursor-pointer">
+                APPLY FOR PROTOCOL
+              </button>
+            </div>
+          </div>
+
+          <!-- Tier 3: COMPETITOR BLACK -->
+          <div class="membership-card border border-border-hairline bg-surface-subtle p-6 lg:p-8 flex flex-col justify-between brutalist-card-interactive" data-tier="black">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-border-hairline mb-4 font-mono text-xs text-text-muted">
+                <span>TIER 03</span>
+                <span>CAP: 20</span>
+              </div>
+              <h3 class="font-display text-2xl uppercase text-primary mb-1">COMPETITOR BLACK</h3>
+              <div class="flex items-baseline gap-2 mb-4">
+                <span class="font-display text-4xl text-primary font-normal">€340</span>
+                <span class="font-mono text-xs text-text-muted uppercase">/ MONTH</span>
+              </div>
+              <p class="font-body text-sm text-secondary mb-6">
+                Total immersion for national competitors requiring tailored strength orchestration.
+              </p>
+              <ul class="space-y-3 font-body text-sm text-secondary border-t border-border-hairline pt-4">
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>Dedicated faculty coach assignment</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>24/7 master keycard facility access</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>Permanent gear locker &amp; laundry</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-text-muted">•</span>
+                  <span>Competition game-day handling support</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-8">
+              <button onclick="window.selectTierAndScroll('COMPETITOR BLACK (€340/MO)')" class="w-full py-3.5 border border-border-medium text-primary font-mono text-xs uppercase tracking-wider hover:bg-[#23252A] hover:border-text-muted transition-colors cursor-pointer">
+                APPLY FOR BLACK
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SCENE 06: HEAD COACHES (Striking Photographic Portraits) -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline py-20 lg:py-32 bg-[#0A0B0D]" id="coaches">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="section-reveal-header flex flex-col md:flex-row md:items-end justify-between mb-12 pb-4 border-b border-border-hairline">
+          <div>
+            <span class="font-mono text-xs text-primary-container uppercase tracking-widest">06 // FACULTY</span>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl uppercase text-primary tracking-tight mt-1">
+              HEAD COACHES
+            </h2>
+          </div>
+          <p class="font-mono text-xs text-text-muted max-w-sm mt-3 md:mt-0 uppercase tracking-wide">
+            Collegiate and international coaching backgrounds. Practicing athletes only.
+          </p>
+        </div>
+
+        <!-- 3 Striking Profiles with Genuine Photographic Portraits -->
+        <div class="coaches-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Coach 1: Marcus Vogel -->
+          <div class="coach-card border border-border-hairline bg-surface-card flex flex-col justify-between overflow-hidden brutalist-card-interactive group">
+            <div class="relative h-[320px] sm:h-[360px] overflow-hidden bg-surface-subtle">
+              <img src="assets/coach-marcus-hires.jpg" alt="Head Coach Marcus Vogel" width="1600" height="2400" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale contrast-130 brightness-90 img-zoom-hover"/>
+              <div class="absolute bottom-3 left-3 bg-[#0A0B0D]/90 border border-border-hairline px-2.5 py-1 font-mono text-[10px] text-primary-container">
+                HEAD OF STRENGTH
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display text-2xl uppercase text-primary tracking-tight mb-1">MARCUS VOGEL</h3>
+              <p class="font-body text-sm text-secondary leading-relaxed mb-6 mt-3">
+                Former national powerlifting director. Specializes in advanced conjugate periodization and sub-maximal loading for elite athletes.
+              </p>
+              <div class="pt-4 border-t border-border-hairline font-mono text-[11px] text-text-muted">
+                CSCS*D · IPF CATEGORY 1 · M.SC. KINESIOLOGY
+              </div>
+            </div>
+          </div>
+
+          <!-- Coach 2: Elena Korhonen -->
+          <div class="coach-card border border-border-hairline bg-surface-card flex flex-col justify-between overflow-hidden brutalist-card-interactive group">
+            <div class="relative h-[320px] sm:h-[360px] overflow-hidden bg-surface-subtle">
+              <img src="assets/coach-elena-hires.jpg" alt="Weightlifting Director Elena Korhonen" width="1600" height="1067" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale contrast-130 brightness-90 img-zoom-hover"/>
+              <div class="absolute bottom-3 left-3 bg-[#0A0B0D]/90 border border-border-hairline px-2.5 py-1 font-mono text-[10px] text-primary-container">
+                WEIGHTLIFTING DIRECTOR
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display text-2xl uppercase text-primary tracking-tight mb-1">ELENA KORHONEN</h3>
+              <p class="font-body text-sm text-secondary leading-relaxed mb-6 mt-3">
+                Two-time European weightlifting competitor. Focuses purely on snatch dynamics, second-pull mechanics, and bar trajectory under load.
+              </p>
+              <div class="pt-4 border-t border-border-hairline font-mono text-[11px] text-text-muted">
+                USAW LEVEL 3 · IWF CERTIFIED · EXOS
+              </div>
+            </div>
+          </div>
+
+          <!-- Coach 3: David O'Connor -->
+          <div class="coach-card border border-border-hairline bg-surface-card flex flex-col justify-between overflow-hidden brutalist-card-interactive group">
+            <div class="relative h-[320px] sm:h-[360px] overflow-hidden bg-surface-subtle">
+              <img src="assets/coach-david.jpg" alt="Biomechanics Director David O'Connor" width="800" height="1200" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale contrast-130 brightness-90 img-zoom-hover"/>
+              <div class="absolute bottom-3 left-3 bg-[#0A0B0D]/90 border border-border-hairline px-2.5 py-1 font-mono text-[10px] text-primary-container">
+                BIOMECHANICS &amp; LOAD
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display text-2xl uppercase text-primary tracking-tight mb-1">DAVID O'CONNOR</h3>
+              <p class="font-body text-sm text-secondary leading-relaxed mb-6 mt-3">
+                Consultant for professional rugby programs. Integrates 3D kinematic capture to eliminate movement compensations and prevent injury.
+              </p>
+              <div class="pt-4 border-t border-border-hairline font-mono text-[11px] text-text-muted">
+                PH.D. BIOMECHANICS · GYMAWARE MASTER · PRI
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SCENE 07: THE FINAL FRAME (Full-Width Cinematic Climax)-->
+    <!-- ====================================================== -->
+    <section class="relative w-full min-h-[640px] sm:min-h-[720px] lg:min-h-[820px] flex items-center justify-center border-b border-border-hairline overflow-hidden" id="final-frame">
+      
+      <!-- Full-bleed Authentic Athlete Photography Background -->
+      <div class="absolute inset-0 z-0">
+        <img src="assets/athlete-final.jpg" alt="Athlete resting against competition rack" width="1600" height="1067" loading="lazy" decoding="async" class="final-frame-bg w-full h-full object-cover grayscale contrast-140 brightness-50"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-[#0A0B0D]/80"></div>
+      </div>
+
+      <!-- Monumental Climax Content -->
+      <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 py-20">
+        <span class="font-mono text-xs text-primary-container uppercase tracking-widest block">
+          07 // THE STANDARD
+        </span>
+        
+        <h2 class="font-display fluid-climax-headline uppercase tracking-tighter text-primary select-none">
+          YOUR WORK.<br/>
+          <span class="text-primary-container">YOUR STANDARD.</span>
+        </h2>
+
+        <p class="font-body text-base sm:text-xl text-secondary max-w-xl mx-auto leading-relaxed pt-2">
+          120 spots. No commercial noise. Only the honest resistance of the barbell.
+        </p>
+
+        <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#intake" class="px-10 py-5 bg-primary-container text-on-primary-fixed font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#F4F3EF] hover:text-[#0A0B0D] transition-colors">
+            CLAIM YOUR ROSTER SLOT
+          </a>
+          <button data-action="open-prospectus" class="px-8 py-5 border border-primary text-primary font-mono text-xs uppercase tracking-wider hover:bg-[#F4F3EF] hover:text-[#0A0B0D] transition-colors cursor-pointer">
+            READ THE PROSPECTUS
+          </button>
+        </div>
+
+        <div class="pt-4 font-mono text-xs text-text-muted">
+          BERLIN MITTE // HOLZMARKTSTRASSE 18
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- SECTION 08: APPLICATION INTAKE FORM                    -->
+    <!-- ====================================================== -->
+    <section class="w-full border-b border-border-hairline py-20 lg:py-28 bg-[#0A0B0D]" id="intake">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="intake-form-card border border-border-hairline bg-surface-subtle p-6 sm:p-10 lg:p-12">
+          
+          <div class="mb-8 pb-6 border-b border-border-hairline">
+            <span class="font-mono text-xs text-primary-container uppercase tracking-widest block mb-1">08 // INTAKE</span>
+            <h2 class="font-display text-4xl sm:text-5xl uppercase text-primary tracking-tight leading-none mb-3">
+              CLAIM YOUR PLATFORM.
+            </h2>
+            <p class="font-body text-sm text-secondary max-w-xl">
+              Applications are reviewed within 24 operational hours. Approved athletes receive an orientation pass for their barbell screening.
+            </p>
+          </div>
+
+          <form id="intake-form" class="space-y-6">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="intake-name" class="font-mono text-xs text-text-muted block mb-2 uppercase">FULL NAME *</label>
+                <input id="intake-name" class="w-full bg-[#0A0B0D] border border-border-hairline focus:border-primary-container text-primary font-mono text-sm p-3.5 outline-none transition-colors" placeholder="Alexander Vogt" required="" type="text"/>
+              </div>
+              <div>
+                <label for="intake-email" class="font-mono text-xs text-text-muted block mb-2 uppercase">EMAIL ADDRESS *</label>
+                <input id="intake-email" class="w-full bg-[#0A0B0D] border border-border-hairline focus:border-primary-container text-primary font-mono text-sm p-3.5 outline-none transition-colors" placeholder="athlete@domain.de" required="" type="email"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="intake-discipline" class="font-mono text-xs text-text-muted block mb-2 uppercase">PRIMARY FOCUS *</label>
+                <select id="intake-discipline" class="w-full bg-[#0A0B0D] border border-border-hairline focus:border-primary-container text-primary font-mono text-sm p-3.5 outline-none transition-colors">
+                  <option>Powerlifting (SBD)</option>
+                  <option>Olympic Weightlifting</option>
+                  <option>Hybrid Strength &amp; Conditioning</option>
+                  <option>Athletic Reconditioning</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake-tier" class="font-mono text-xs text-text-muted block mb-2 uppercase">MEMBERSHIP PLAN *</label>
+                <select id="intake-tier" class="w-full bg-[#0A0B0D] border border-border-hairline focus:border-primary-container text-primary font-mono text-sm p-3.5 outline-none transition-colors">
+                  <option value="ATHLETE PROTOCOL (€220/MO)">Athlete Protocol (€220/mo) — Recommended</option>
+                  <option value="RESIDENT (€145/MO)">Resident (€145/mo)</option>
+                  <option value="COMPETITOR BLACK (€340/MO)">Competitor Black (€340/mo)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="intake-exp" class="font-mono text-xs text-text-muted block mb-2 uppercase">BARBELL EXPERIENCE</label>
+                <select id="intake-exp" class="w-full bg-[#0A0B0D] border border-border-hairline focus:border-primary-container text-primary font-mono text-sm p-3.5 outline-none transition-colors">
+                  <option>1 – 2 Years</option>
+                  <option selected="">3 – 5 Years</option>
+                  <option>5 – 10 Years</option>
+                  <option>10+ Years</option>
+                </select>
+              </div>
+              <div>
+                <label for="intake-prs" class="font-mono text-xs text-text-muted block mb-2 uppercase">CURRENT TOTAL / PRs (OPTIONAL)</label>
+                <input id="intake-prs" class="w-full bg-[#0A0B0D] border border-border-hairline focus:border-primary-container text-primary font-mono text-sm p-3.5 outline-none transition-colors" placeholder="e.g. 500kg SBD total" type="text"/>
+              </div>
+            </div>
+
+            <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-border-hairline">
+              <span class="font-mono text-[11px] text-text-muted">
+                BY SUBMITTING, YOU AGREE TO FACILITY SAFETY BYLAWS.
+              </span>
+              <button id="intake-submit-btn" class="px-8 py-4 bg-primary-container text-on-primary-fixed font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#F4F3EF] hover:text-[#0A0B0D] transition-colors cursor-pointer">
+                SUBMIT APPLICATION
+              </button>
+            </div>
+
+            <!-- Instant Confirmation Feedback -->
+            <div id="confirmation-msg" class="hidden p-5 bg-[#0A0B0D] border border-primary-container text-primary-container font-mono text-xs space-y-2">
+              <div class="font-bold text-sm text-primary-container">
+                [ APPLICATION DOSSIER RECEIVED // REF: #IV-8842-BERLIN ]
+              </div>
+              <div class="text-secondary font-body text-sm">
+                Your application has been routed to Head Coach Marcus Vogel. We will contact you via email within 24 operational hours with your orientation screening slot.
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- MANIFESTO & RESTRAINED FOOTER                          -->
+    <!-- ====================================================== -->
+    <footer class="w-full bg-[#0A0B0D]" id="manifesto">
+      
+      <!-- Minimalist Manifesto Statement -->
+      <div class="border-b border-border-hairline py-16 sm:py-20">
+        <div class="manifesto-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span class="font-mono text-xs text-primary-container uppercase tracking-widest block mb-4">
+            MANIFESTO
+          </span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl uppercase text-primary tracking-tight leading-tight mb-6">
+            DISCIPLINE OVER COMFORT.
+          </h2>
+          <p class="font-body text-base sm:text-lg text-secondary leading-relaxed max-w-2xl mx-auto">
+            We built IronVault for the few who treat strength as craft. No mirrors for vanity, no commercial fitness trends—only calibrated steel, precise measurement, and honest work.
+          </p>
+        </div>
+      </div>
+
+      <!-- Compact Footer Information -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-border-hairline font-mono text-xs text-text-muted">
+          <div>
+            <span class="text-primary font-bold">IRONVAULT FACILITY 01</span><br/>
+            HOLZMARKTSTRASSE 18, 10179 BERLIN<br/>
+            MON — SUN // 05:00 — 23:00
+          </div>
+          
+          <div class="flex flex-wrap gap-6">
+            <a class="hover:text-primary transition-colors" href="#hero">INDEX</a>
+            <a class="hover:text-primary transition-colors" href="#ritual">THE RITUAL</a>
+            <a class="hover:text-primary transition-colors" href="#facility">FACILITY</a>
+            <a class="hover:text-primary transition-colors" href="#programs">PROGRAMS</a>
+            <a class="hover:text-primary transition-colors" href="#membership">MEMBERSHIP</a>
+            <a class="hover:text-primary transition-colors" href="#coaches">COACHES</a>
+            <a class="hover:text-primary transition-colors" href="#intake">APPLY</a>
+          </div>
+        </div>
+
+        <div class="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px] text-text-muted">
+          <div>
+            <span>© 2026 IRONVAULT FITNESS.</span>
+            <span class="ml-2 pl-2 border-l border-border-hairline text-primary-container">[ DEMO CONCEPT FOR BERLIN FACILITY ]</span>
+          </div>
+          <div>
+            <button data-action="open-prospectus" class="hover:text-primary cursor-pointer uppercase">
+              ATHLETE RULES &amp; PROSPECTUS
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </footer>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ATHLETE PROSPECTUS                                -->
+  <!-- ======================================================== -->
+  <div id="prospectus-modal" class="hidden fixed inset-0 z-50 bg-[#0A0B0D]/90 items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="prospectus-title">
+    <div class="bg-[#18191D] border border-border-hairline w-full max-w-xl max-h-[85vh] flex flex-col justify-between">
+      <div class="p-6 border-b border-border-hairline flex items-center justify-between">
+        <div>
+          <span class="font-mono text-xs text-primary-container uppercase tracking-widest">[ OFFICIAL DOSSIER ]</span>
+          <h3 id="prospectus-title" class="font-display text-2xl uppercase text-primary mt-1">ATHLETE PROSPECTUS</h3>
+        </div>
+        <button data-action="close-prospectus" class="p-2.5 border border-border-hairline text-primary hover:text-primary-container flex items-center justify-center cursor-pointer" aria-label="Close modal">
+          <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-5 overflow-y-auto font-body text-sm text-secondary">
+        <div>
+          <h4 class="font-mono text-xs text-primary uppercase mb-1.5 font-bold">01 // PLATFORM RULES</h4>
+          <p>
+            IronVault operates on athlete autonomy. All barbells must be stripped and cleaned after work sets. Commercial headphones and chalkless lifting are forbidden. Platform priority follows structured competition preparation.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs text-primary uppercase mb-1.5 font-bold">02 // EQUIPMENT STANDARDS</h4>
+          <p>
+            14 Eleiko IPF power racks, 8 weightlifting stations with isolated sound-dampened birch floors, calibrated steel plates (±10g tolerance), and GymAware optical linear position transducers on every rack.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs text-primary uppercase mb-1.5 font-bold">03 // INTAKE STANDARDS</h4>
+          <p>
+            Candidates must demonstrate baseline technical proficiency in the squat, bench press, deadlift, or snatch/clean &amp; jerk. An initial 30-minute barbell screening is mandatory prior to biometric turnstile activation.
+          </p>
+        </div>
+      </div>
+
+      <div class="p-5 border-t border-border-hairline flex items-center justify-between bg-[#0A0B0D]">
+        <span class="font-mono text-xs text-text-muted">IRONVAULT // MITTE</span>
+        <div class="flex gap-3">
+          <button onclick="alert('Athlete Prospectus PDF downloaded.');" class="px-4 py-2 bg-primary-container text-on-primary-fixed font-mono text-xs font-bold uppercase hover:bg-[#F4F3EF] cursor-pointer">
+            DOWNLOAD PDF
+          </button>
+          <button data-action="close-prospectus" class="px-4 py-2 border border-border-hairline text-primary font-mono text-xs uppercase hover:bg-surface-subtle cursor-pointer">
+            CLOSE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GSAP & ScrollTrigger Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Client Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>
