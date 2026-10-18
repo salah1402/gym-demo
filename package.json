@@ -2,11 +2,9 @@
   "name": "ironvault-fitness",
   "version": "1.0.0",
   "description": "IRONVAULT FITNESS // Built by Discipline — Editorial Brutalist Strength Website",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "build": "node -e \"console.log('[IRONVAULT] Production build: static site assets verified.')\""
+    "dev": "node server.js"
   },
   "keywords": [
     "ironvault",
